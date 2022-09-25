@@ -1,0 +1,7 @@
+.header_area {
+    display: flex;
+}
+
+.logo {
+    max-width: 200px;
+}
