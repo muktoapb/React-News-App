@@ -13,7 +13,7 @@ function App() {
   
 
   useEffect(() => {
-    tonewsfunc('top-headlines?country=us');
+    tonewsfunc('top-headlines');
   }, [])
  
   //local storage
