@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import styled, { css } from 'styled-components';
 import './App.css';
 import Header  from './components/Header/Header';
 import TopNews from './components/news/TopNews';
@@ -8,44 +9,62 @@ import TopNews from './components/news/TopNews';
 //top-headlines?country=us
 
 function App() {
-  const [topnews, setTopnews]=useState([]);
+  const [news, setNews]=useState([]);
 
   
 
   useEffect(() => {
-    tonewsfunc('top-headlines');
+    tonewsfunc();
   }, [])
  
   //local storage
-  const topNews = localStorage.getItem('topnews');
+  const storedNews = localStorage.getItem('news');
 
-  const tonewsfunc = async(type)=>{
-    if (topNews) {
-      setTopnews(JSON.parse(topNews));
+  const tonewsfunc = async()=>{
+    if (storedNews) {
+      setNews(JSON.parse(storedNews));
     }else{
-      const api = await fetch(`https://newsapi.org/v2/${type}&apiKey=${process.env.REACT_APP_NEWS_KEY}`);
+
+      const api = await fetch(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_NEWS_KEY}`);
       const data = await api.json();
-      localStorage.setItem("topnews", JSON.stringify(data.articles));
-      setTopnews(data.articles)
+      localStorage.setItem("news", JSON.stringify(data.articles));
+      setNews(data.articles)
     }
   }
   
-  console.log(topnews);
+  // console.log(news);
 
   
   // console.log('other',topnews);
   return (
-    <div className="App">
-      <div className="app_wrapper">
-        <div className="main">
+    <>
+      <AppWrapper>
+        <Main>
           <Header/>
-          <TopNews/>
-        </div>
-        <div className="sidebar">
-        </div>
-      </div>
-    </div>
+          <TopNews news={news}/>
+        </Main>
+        <Sidebar>
+          hello
+        </Sidebar>
+      </AppWrapper>
+    </>
   );
 }
-
 export default App;
+
+
+
+const Main = styled.div`
+  width:70%
+`;
+const Sidebar = styled.div`
+  width:30%
+`;
+const AppWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 15px;
+
+`;

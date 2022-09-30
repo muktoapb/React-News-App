@@ -1,12 +1,18 @@
 import React from 'react'
-
+import styled from 'styled-components'
+import { Input,Button } from '../style';
 export default function Search() {
   return (
-    <div className="search_area">
+    <SearchArea>
         <form>
-            <input type="text" placeholder='Search Here...' />
-            <button>Search News</button>
+            <Input type="text" placeholder='Search Here...' />
+            <Button>Search News</Button>
         </form>
-    </div>
+    </SearchArea>
   )
 }
+
+// Style 
+const SearchArea = styled.div`
+    
+`;
