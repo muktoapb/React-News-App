@@ -1,35 +1,53 @@
-import React from 'react'
 import styled from 'styled-components';
+// slick 
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+// global style
+import { SliderWrapper } from '../style';
+
 
 
 export default function TopNews({ news }) {
   const topFive = news.slice(0, 3);
   // console.log(topFive);
-  return (
-    <div className="topNew_wrapper">
-      {
-        topFive?.map((n, index) => (
-          // console.log(n);
-          <TopCard key={index}>
-            <div className="card_text">
-              <h3>{n?.title}</h3>
-              <p>{n.description}</p>
-              <a href="#">Read More</a>
-            </div>
-            <div className="card_image">
-              <img src={n.urlToImage} alt={n.title} />
-            </div>
-          </TopCard>
 
-        ))
-      }
-    </div>
+  const sliderSetting = {
+    infinite: true,
+    autoplay: true,
+    dots: true,
+    autoplaySpeed: 5000,
+  }
+
+  return (
+    <SliderWrapper>
+      <Slider {...sliderSetting}>
+        {
+          topFive?.map((n, index) => (
+
+            <>
+              <TopCard key={index}>
+                <div className="card_text">
+                  <h3>{n?.title.slice(0, 80)} {(n.title.length > 80) ? '...' : ''}</h3>
+                  <p>{n?.description.slice(0, 100)} {(n.description.length > 100) ? '...' : ''}</p>
+                  <a href="#">Read More</a>
+                </div>
+                <div className="card_image">
+                  <img src={n.urlToImage} alt={n.title} />
+                </div>
+              </TopCard>
+            </>
+          ))
+        }
+      </Slider>
+    </SliderWrapper>
   );
 
 }
 
 
 //Styled element
+
 const TopCard = styled.article`
   display: grid;
   grid-template-columns: 50% auto;

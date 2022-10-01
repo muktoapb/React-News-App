@@ -13,3 +13,14 @@ export const Button = styled.button`
     background-color: #000;
 
 `;
+
+// slider 
+export const SliderWrapper = styled.article`
+  margin-top: 30px;
+  .slick-dots {
+    bottom: 25px;
+  }
+  .slick-dots li button:before {
+    font-size: 15px;
+  }
+`;
