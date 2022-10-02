@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import './App.css';
 import Header  from './components/Header/Header';
 import TopNews from './components/news/TopNews';
+import News from './components/news/News';
 
 
 
@@ -42,9 +43,9 @@ function App() {
         <Main>
           <Header/>
           <TopNews news={news}/>
+          <News news={news}/>
         </Main>
         <Sidebar>
-          hello
         </Sidebar>
       </AppWrapper>
     </>

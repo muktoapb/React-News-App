@@ -4,13 +4,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 // global style
-import { SliderWrapper } from '../style';
+import { SliderWrapper,Title } from '../style';
 
 
 
 export default function TopNews({ news }) {
   const topFive = news.slice(0, 3);
-  // console.log(topFive);
 
   const sliderSetting = {
     infinite: true,
@@ -18,25 +17,25 @@ export default function TopNews({ news }) {
     dots: true,
     autoplaySpeed: 5000,
   }
-
   return (
     <SliderWrapper>
+      <Title>Tranding Now</Title>
       <Slider {...sliderSetting}>
         {
           topFive?.map((n, index) => (
 
-            <>
-              <TopCard key={index}>
+            <div key={index}>
+              <TopCard>
                 <div className="card_text">
                   <h3>{n?.title.slice(0, 80)} {(n.title.length > 80) ? '...' : ''}</h3>
                   <p>{n?.description.slice(0, 100)} {(n.description.length > 100) ? '...' : ''}</p>
-                  <a href="#">Read More</a>
+                  <a href={n?.url} target="_blank" rel="noreferrer">Read More</a>
                 </div>
                 <div className="card_image">
                   <img src={n.urlToImage} alt={n.title} />
                 </div>
               </TopCard>
-            </>
+            </div>
           ))
         }
       </Slider>
